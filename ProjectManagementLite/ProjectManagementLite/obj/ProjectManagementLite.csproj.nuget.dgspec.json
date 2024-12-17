@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj": {}
+    "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj": {}
   },
   "projects": {
-    "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj": {
+    "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
+        "projectUniqueName": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
         "projectName": "ProjectManagementLite",
-        "projectPath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
+        "projectPath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
         "packagesPath": "/Users/brandonbaker/.nuget/packages/",
-        "outputPath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/obj/",
+        "outputPath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/brandonbaker/.nuget/NuGet/NuGet.Config"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nRTs0jX/zOs7Bz8Jn9YdFTJyKBGJHHUVC2EF7KQm9pBK4EODped7MsAVHPCG6P9+C4eCCw5ND/yA6EakhwGRrw==",
+  "dgSpecHash": "Ric2if7agNvN/2HuY6e65y0wLnAS3wq6IZ8W3AyCHQ+iWAicsi92zgyICMt2SybQpWqP+eitkBcHpGRHuGRtjA==",
   "success": true,
-  "projectFilePath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
+  "projectFilePath": "/Users/brandonbaker/Desktop/Projects/Personal/Portfolio/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite/ProjectManagementLite.csproj",
   "expectedPackageFiles": [
     "/Users/brandonbaker/.nuget/packages/dapper/2.1.35/dapper.2.1.35.nupkg.sha512",
     "/Users/brandonbaker/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.0/microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
