@@ -1,6 +1,6 @@
 namespace ProjectManagementLite.Models;
 
-public class Task
+public class TaskItem
 {
     public int Id { get; set; }
     public int ProjectId { get; set; } // Foreign key to Project

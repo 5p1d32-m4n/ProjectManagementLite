@@ -2,6 +2,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProjectManagementLite.Repositories;
+using ProjectManagementLite.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
