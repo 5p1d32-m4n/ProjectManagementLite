@@ -1,10 +1,7 @@
 // ProjectManagementLite.Tests/Controllers/ProjectsControllerTests.cs
 using Xunit;
 using Moq;
-using ProjectManagementLite.Controllers;
-using ProjectManagementLite.Services;
-using ProjectManagementLite.DTOs.Project;
-using ProjectManagementLite.Models;
+using ProjectManagementLite;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System.Collections.Generic;

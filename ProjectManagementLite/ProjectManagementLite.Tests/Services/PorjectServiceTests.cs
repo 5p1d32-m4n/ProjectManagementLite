@@ -1,10 +1,7 @@
 // ProjectManagementLite.Tests/Services/ProjectServiceTests.cs
 using Xunit;
 using Moq;
-using ProjectManagementLite.Services;
-using ProjectManagementLite.Repositories;
-using ProjectManagementLite.Models;
-using ProjectManagementLite.DTOs.Project;
+using ProjectManagementLite;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;

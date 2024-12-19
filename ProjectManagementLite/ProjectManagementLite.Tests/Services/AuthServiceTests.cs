@@ -1,9 +1,7 @@
 // ProjectManagementLite.Tests/Services/AuthServiceTests.cs
 using Xunit;
 using Moq;
-using ProjectManagementLite.Services;
-using ProjectManagementLite.Repositories;
-using ProjectManagementLite.Models;
+using ProjectManagementLite;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;

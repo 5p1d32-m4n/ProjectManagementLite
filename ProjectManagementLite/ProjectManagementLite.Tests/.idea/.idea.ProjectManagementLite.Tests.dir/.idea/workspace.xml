@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="74a725b7-4e08-4e9c-bb3c-d00f4389034d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Controllers/ProjectsControllerTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/PorjectServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/TaskServiceTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectManagementLite.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectManagementLite.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectManagementLite.sln" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectManagementReact/project-management-lite-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectManagementReact/project-management-lite-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectManagementReact/project-management-lite-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectManagementReact/project-management-lite-frontend/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2qRzbXTx3HNXYWoHKtxSsldsl4M" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/brandonbaker/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/brandonbaker/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/brandonbaker/Library/Application Support/Symbols/src"
+    ]
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74a725b7-4e08-4e9c-bb3c-d00f4389034d" name="Changes" comment="" />
+      <created>1734640248035</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734640248035</updated>
+      <workItem from="1734640249184" duration="73000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
