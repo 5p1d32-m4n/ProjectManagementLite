@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using System;
+using ProjectManagementLite.Services;
+using ProjectManagementLite.Models;
 
 namespace ProjectManagementLite.Tests.Controllers
 {
@@ -215,7 +217,7 @@ namespace ProjectManagementLite.Tests.Controllers
                 Description = "Updated Description"
             };
 
-            _project_service_mock.Setup(service => service.UpdateProjectAsync(projectId, updateRequest, userId))
+            _projectServiceMock.Setup(service => service.UpdateProjectAsync(projectId, updateRequest, userId))
                 .ThrowsAsync(new Exception("Invalid update data."));
 
             // Act
@@ -283,7 +285,7 @@ namespace ProjectManagementLite.Tests.Controllers
             var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
             var message = Assert.IsType<Dictionary<string, string>>(badRequestResult.Value);
             Assert.Equal("Deletion failed.", message["message"]);
-            _project_service_mock.Verify(service => service.DeleteProjectAsync(projectId, userId), Times.Once);
+            _projectServiceMock.Verify(service => service.DeleteProjectAsync(projectId, userId), Times.Once);
         }
     }
 }

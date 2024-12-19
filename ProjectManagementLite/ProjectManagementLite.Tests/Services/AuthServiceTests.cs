@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using ProjectManagementLite.Models;
+using ProjectManagementLite.Repositories;
+using ProjectManagementLite.Services;
 
 namespace ProjectManagementLite.Tests.Services
 {
@@ -62,7 +65,7 @@ namespace ProjectManagementLite.Tests.Services
             Assert.False(string.IsNullOrEmpty(result.Token));
             Assert.Equal(registerRequest.Username, result.Username);
             _userRepositoryMock.Verify(repo => repo.GetByUsernameAsync(registerRequest.Username), Times.Once);
-            _userRepositoryMock.Verify(repo => repo.CreateUserAsync(It.Is<User>(u => u.Username == registerRequest.Username)), Times.Once);
+            _userRepositoryMock.Verify(repo => repo.CreateUserAsync(It.Is<User>(u => u.UserName == registerRequest.Username)), Times.Once);
         }
 
         [Fact]
@@ -79,7 +82,7 @@ namespace ProjectManagementLite.Tests.Services
             var existingUser = new User
             {
                 Id = 1,
-                Username = "john_doe",
+                UserName = "john_doe",
                 PasswordHash = "hashedpassword",
                 Email = "john@example.com"
             };
@@ -107,7 +110,7 @@ namespace ProjectManagementLite.Tests.Services
             var user = new User
             {
                 Id = 1,
-                Username = "john_doe",
+                UserName = "john_doe",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(loginRequest.Password),
                 Email = "john@example.com"
             };
@@ -121,7 +124,7 @@ namespace ProjectManagementLite.Tests.Services
             // Assert
             Assert.NotNull(result);
             Assert.False(string.IsNullOrEmpty(result.Token));
-            Assert.Equal(user.Username, result.Username);
+            Assert.Equal(user.UserName, result.Username);
             _userRepositoryMock.Verify(repo => repo.GetByUsernameAsync(loginRequest.Username), Times.Once);
         }
 
@@ -157,7 +160,7 @@ namespace ProjectManagementLite.Tests.Services
             var user = new User
             {
                 Id = 1,
-                Username = "john_doe",
+                UserName = "john_doe",
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword("SecureP@ssw0rd"),
                 Email = "john@example.com"
             };

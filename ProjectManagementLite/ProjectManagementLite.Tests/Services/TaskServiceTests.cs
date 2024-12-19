@@ -5,6 +5,9 @@ using ProjectManagementLite;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using ProjectManagementLite.Repositories;
+using ProjectManagementLite.Services;
+using ProjectManagementLite.Models;
 
 namespace ProjectManagementLite.Tests.Services
 {
@@ -57,7 +60,7 @@ namespace ProjectManagementLite.Tests.Services
             int userId = 1;
             int projectId = 1;
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync((Project)null);
 
             // Act & Assert
@@ -78,7 +81,7 @@ namespace ProjectManagementLite.Tests.Services
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
             var task = new TaskItem { Id = taskId, ProjectId = projectId, Title = "Task 1", Status = "Pending", DueDate = DateTime.UtcNow.AddDays(1) };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
             _taskRepositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
@@ -90,8 +93,8 @@ namespace ProjectManagementLite.Tests.Services
             // Assert
             Assert.NotNull(result);
             Assert.Equal(taskId, result.Id);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
         }
 
         [Fact]
@@ -102,14 +105,14 @@ namespace ProjectManagementLite.Tests.Services
             int projectId = 1;
             int taskId = 1;
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync((Project)null);
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.GetTaskByIdAsync(taskId, projectId, userId));
             Assert.Equal("Project not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
         }
 
         [Fact]
@@ -122,17 +125,17 @@ namespace ProjectManagementLite.Tests.Services
 
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
+            _taskRepositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
                 .ReturnsAsync((TaskItem)null);
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.GetTaskByIdAsync(taskId, projectId, userId));
             Assert.Equal("Task not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
         }
 
         [Fact]
@@ -152,21 +155,21 @@ namespace ProjectManagementLite.Tests.Services
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
             var taskId = 1;
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.CreateTaskAsync(It.IsAny<TaskItem>()))
+            _taskRepositoryMock.Setup(repo => repo.CreateTaskAsync(It.IsAny<TaskItem>()))
                 .ReturnsAsync(taskId);
 
             // Act
-            var result = await _task_service.CreateTaskAsync(projectId, createRequest, userId);
+            var result = await _taskService.CreateTaskAsync(projectId, createRequest, userId);
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal(taskId, result.Id);
             Assert.Equal(createRequest.Title, result.Title);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.CreateTaskAsync(It.Is<TaskItem>(t => t.Title == createRequest.Title && t.ProjectId == projectId)), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.CreateTaskAsync(It.Is<TaskItem>(t => t.Title == createRequest.Title && t.ProjectId == projectId)), Times.Once);
         }
 
         [Fact]
@@ -183,14 +186,14 @@ namespace ProjectManagementLite.Tests.Services
                 DueDate = DateTime.UtcNow.AddDays(3)
             };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync((Project)null);
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.CreateTaskAsync(projectId, createRequest, userId));
             Assert.Equal("Project not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.CreateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.CreateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
         }
 
         [Fact]
@@ -219,23 +222,23 @@ namespace ProjectManagementLite.Tests.Services
                 DueDate = DateTime.UtcNow.AddDays(2)
             };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
+            _taskRepositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
                 .ReturnsAsync(existingTask);
 
-            _task_repositoryMock.Setup(repo => repo.UpdateTaskAsync(existingTask))
+            _taskRepositoryMock.Setup(repo => repo.UpdateTaskAsync(existingTask))
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _task_service.UpdateTaskAsync(taskId, updateRequest, projectId, userId);
+            var result = await _taskService.UpdateTaskAsync(taskId, updateRequest, projectId, userId);
 
             // Assert
             Assert.True(result);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.UpdateTaskAsync(It.Is<TaskItem>(t => t.Title == updateRequest.Title && t.Status == updateRequest.Status)), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.UpdateTaskAsync(It.Is<TaskItem>(t => t.Title == updateRequest.Title && t.Status == updateRequest.Status)), Times.Once);
         }
 
         [Fact]
@@ -253,15 +256,15 @@ namespace ProjectManagementLite.Tests.Services
                 DueDate = DateTime.UtcNow.AddDays(5)
             };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync((Project)null);
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() => _task_service.UpdateTaskAsync(taskId, updateRequest, projectId, userId));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.UpdateTaskAsync(taskId, updateRequest, projectId, userId));
             Assert.Equal("Project not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
-            _task_repositoryMock.Verify(repo => repo.UpdateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+            _taskRepositoryMock.Verify(repo => repo.UpdateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
         }
 
         [Fact]
@@ -281,18 +284,18 @@ namespace ProjectManagementLite.Tests.Services
 
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
+            _taskRepositoryMock.Setup(repo => repo.GetTaskByIdAsync(taskId, projectId))
                 .ReturnsAsync((TaskItem)null);
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() => _task_service.UpdateTaskAsync(taskId, updateRequest, projectId, userId));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.UpdateTaskAsync(taskId, updateRequest, projectId, userId));
             Assert.Equal("Task not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.UpdateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.GetTaskByIdAsync(taskId, projectId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.UpdateTaskAsync(It.IsAny<TaskItem>()), Times.Never);
         }
 
         [Fact]
@@ -305,19 +308,19 @@ namespace ProjectManagementLite.Tests.Services
 
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.DeleteTaskAsync(taskId, projectId))
+            _taskRepositoryMock.Setup(repo => repo.DeleteTaskAsync(taskId, projectId))
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _task_service.DeleteTaskAsync(taskId, projectId, userId);
+            var result = await _taskService.DeleteTaskAsync(taskId, projectId, userId);
 
             // Assert
             Assert.True(result);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.DeleteTaskAsync(taskId, projectId), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.DeleteTaskAsync(taskId, projectId), Times.Once);
         }
 
         [Fact]
@@ -328,14 +331,14 @@ namespace ProjectManagementLite.Tests.Services
             int projectId = 1;
             int taskId = 1;
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync((Project)null);
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() => _task_service.DeleteTaskAsync(taskId, projectId, userId));
+            var exception = await Assert.ThrowsAsync<Exception>(() => _taskService.DeleteTaskAsync(taskId, projectId, userId));
             Assert.Equal("Project not found.", exception.Message);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.DeleteTaskAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.DeleteTaskAsync(It.IsAny<int>(), It.IsAny<int>()), Times.Never);
         }
 
         [Fact]
@@ -348,19 +351,19 @@ namespace ProjectManagementLite.Tests.Services
 
             var project = new Project { Id = projectId, Name = "Project 1", UserId = userId };
 
-            _project_repositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
+            _projectRepositoryMock.Setup(repo => repo.GetProjectByIdAsync(projectId, userId))
                 .ReturnsAsync(project);
 
-            _task_repositoryMock.Setup(repo => repo.DeleteTaskAsync(taskId, projectId))
+            _taskRepositoryMock.Setup(repo => repo.DeleteTaskAsync(taskId, projectId))
                 .ReturnsAsync(false);
 
             // Act
-            var result = await _task_service.DeleteTaskAsync(taskId, projectId, userId);
+            var result = await _taskService.DeleteTaskAsync(taskId, projectId, userId);
 
             // Assert
             Assert.False(result);
-            _project_repositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
-            _task_repositoryMock.Verify(repo => repo.DeleteTaskAsync(taskId, projectId), Times.Once);
+            _projectRepositoryMock.Verify(repo => repo.GetProjectByIdAsync(projectId, userId), Times.Once);
+            _taskRepositoryMock.Verify(repo => repo.DeleteTaskAsync(taskId, projectId), Times.Once);
         }
     }
 }
